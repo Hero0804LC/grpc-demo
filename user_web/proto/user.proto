@@ -1,0 +1,63 @@
+syntax = "proto3";
+package user.v1;
+option go_package = "user_web/pb/proto;pb";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/empty.proto";
+service UserService{
+  //用户登录
+  rpc GetUserList(PageInfo) returns (UserListResponse);
+  //根据ID查询用户
+  rpc GetUserById(IdRequest) returns (UserInfoResponse);
+  //根据手机号查询用户
+  rpc GetUserByMobile(MobileRequest) returns (UserInfoResponse);
+  //创建用户
+  rpc CreateUser(CreateUserInfo) returns (CreateUserResponse);
+  //更新用户
+  rpc UpdateUser(UpdateUserInfo) returns (UpdateUserResponse);
+  //删除用户
+  rpc DeleteUser(IdRequest) returns (google.protobuf.Empty);
+}
+//分页请求
+message PageInfo{
+  int64 page = 1;
+  int64 page_size = 2;
+  string order_by = 3;
+}
+//用户列表返回
+message UserListResponse{
+  int64 total = 1;
+  repeated UserInfoResponse data = 2;
+}
+//单个用户信息
+message UserInfoResponse{
+  int64 id = 1;
+  string mobile = 2;
+  string nick_name = 3;
+  string gender = 4;
+  google.protobuf.Timestamp birthday = 5;
+  int64 role = 6;
+}
+//请求结构体
+message IdRequest{
+  int64 id = 1;
+}
+message MobileRequest{
+  string mobile = 1;
+}
+message CreateUserInfo{
+  string nick_name = 1;
+  string password = 2;
+  string mobile = 3;
+}
+message CreateUserResponse{
+  int64 id = 1;
+}
+message UpdateUserInfo{
+  int64 id = 1;
+  string nick_name = 2;
+  string gender = 3;
+  google.protobuf.Timestamp birthday = 4;
+}
+message UpdateUserResponse{
+  bool success = 1;
+}
