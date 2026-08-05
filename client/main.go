@@ -2,16 +2,15 @@ package main
 
 import (
 	"context"
-	"grpc-demo/pkg/client"
 	pb "grpc-demo/user_web/pb/proto"
 	"log"
 	"time"
 )
 
-//user_web
+// user_web
 func main1() {
 	//获取全局grpc客户端
-	c := client.Client()
+	c := Client()
 	conn, err := c.Conn()
 	if err != nil {
 		log.Fatalf("grpc连接失败:%v", err)
