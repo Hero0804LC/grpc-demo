@@ -8,7 +8,7 @@ import (
 	"google.golang.org/grpc/status"
 	"google.golang.org/protobuf/types/known/emptypb"
 	"google.golang.org/protobuf/types/known/timestamppb"
-	pb "grpc-demo/user_web/pb/proto"
+	pb "grpc-demo/user_web/pb"
 	"log"
 	"net"
 	"sync"
@@ -37,7 +37,7 @@ type userServer struct {
 	pb.UnimplementedUserServiceServer
 }
 
-func StartGRPCServer() {
+func StartGRPCServer(ready chan<- struct{}) {
 	lis, err := net.Listen("tcp", ":50051")
 	if err != nil {
 		log.Fatalf("failed to listen: %v", err)
@@ -46,10 +46,14 @@ func StartGRPCServer() {
 	s := grpc.NewServer()
 	pb.RegisterUserServiceServer(s, &userServer{})
 	reflection.Register(s)
-	log.Println("gRPC server listening on :50051")
-	if err := s.Serve(lis); err != nil {
-		log.Fatalf("failed to serve: %v", err)
-	}
+
+	go func() {
+		log.Println("gRPC server listening on :50051")
+		close(ready)
+		if err := s.Serve(lis); err != nil {
+			log.Fatalf("failed to serve: %v", err)
+		}
+	}()
 }
 
 // 获取用户列表
