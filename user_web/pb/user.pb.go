@@ -573,7 +573,7 @@ const file_user_proto_rawDesc = "" +
 	"\n" +
 	"UpdateUser\x12\x17.user.v1.UpdateUserInfo\x1a\x1b.user.v1.UpdateUserResponse\x128\n" +
 	"\n" +
-	"DeleteUser\x12\x12.user.v1.IdRequest\x1a\x16.google.protobuf.EmptyB\x16Z\x14user_web/pb/proto;pbb\x06proto3"
+	"DeleteUser\x12\x12.user.v1.IdRequest\x1a\x16.google.protobuf.EmptyB Z\x1egrpc-demo/user_web/pb/proto;pbb\x06proto3"
 
 var (
 	file_user_proto_rawDescOnce sync.Once

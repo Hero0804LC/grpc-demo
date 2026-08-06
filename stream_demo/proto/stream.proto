@@ -1,2 +1,18 @@
 syntax = "proto3";
 package stream.v1;
+option go_package = "grpc-demo/stream_demo/pb/proto;pb";
+
+message LogSubscribeRequest{
+  string topic = 1;
+}
+
+message LogEntry{
+  int64 seq = 1;
+  string level = 2;
+  string msg = 3;
+  int64 ts = 4;
+}
+
+service StreamService{
+  rpc SubscribeLogs(LogSubscribeRequest) returns (stream LogEntry);
+}
