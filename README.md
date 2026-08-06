@@ -4,6 +4,9 @@ grpc的demo用于自己练习
 ## client
 客户端示例，用于测试接口效果
 
+## interceptor_demo
+日志加鉴权demo
+
 ## user_web
 v1基于内存数据模拟用户CRUD操作
 v2添加gin
