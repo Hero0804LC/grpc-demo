@@ -4,6 +4,9 @@ grpc的demo用于自己练习
 ## client
 客户端示例，用于测试接口效果
 
+## seckill
+模拟并发抢购，Kafka使用Docker部署，便于本地联调
+
 ## interceptor_demo
 日志加鉴权demo
 

@@ -1,0 +1,15 @@
+syntax = "proto3";
+package seckill.v1;
+option go_package = "grpc-demo/seckill/pb;pb";
+message SeckillRequest {
+  int64 user_id = 1;
+  int64 goods_id = 2;
+}
+message SeckillResponse{
+  string order_no = 1;
+  string msg = 2;
+}
+
+service SeckillService{
+  rpc DoSeckill(SeckillRequest) returns (SeckillResponse);
+}
